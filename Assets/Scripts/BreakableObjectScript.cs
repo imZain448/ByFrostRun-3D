@@ -5,7 +5,7 @@ using UnityEngine;
 public class BreakableObjectScript : MonoBehaviour
 {
     public GameObject remains;
-    public Vector3 spawnPosition;
+    private Vector3 spawnPosition;
     private GameObject RemainPost;
     private GameObject postEffect;
     public GameObject explosionEffect;
@@ -21,7 +21,7 @@ public class BreakableObjectScript : MonoBehaviour
 
     IEnumerator destroyEffect(Collider player)
     {
-        spawnPosition = transform.position;
+        spawnPosition = transform.position - new Vector3(0 ,- 4, 3);
         RemainPost = Instantiate(remains, spawnPosition, transform.rotation);
         postEffect = Instantiate(explosionEffect, spawnPosition, transform.rotation);
         gameObject.GetComponent<AudioSource>().PlayOneShot(explosionSound);

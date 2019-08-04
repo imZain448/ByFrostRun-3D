@@ -6,15 +6,24 @@ public class killerCubeScript : MonoBehaviour
 {
     public GameObject PlayerRemains;
     private Transform PlayerTransform;
+
+    [HideInInspector]
     public CameraMotor cameraMotorScript;
-    private GameObject objectinstance;
     public AudioClip destroySound;
     public GameObject particleEffect;
     public GameObject cubeEffect;
     private GameObject dummyEffect;
+
+    [HideInInspector]
     public CharacterMotor playerMotorScript;
     public Vector3 DestroyOffset = new Vector3(1, 1, 4);
     private Vector3 RemainTransform;
+
+    private void Start()
+    {
+        cameraMotorScript = FindObjectOfType<CameraMotor>();
+        playerMotorScript = FindObjectOfType<CharacterMotor>();
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -24,9 +33,9 @@ public class killerCubeScript : MonoBehaviour
 
             playerMotorScript.enabled = false;
 
-            RemainTransform = new Vector3(transform.position.x - DestroyOffset.x , 0.039f , transform.position.z);
+            RemainTransform = new Vector3(transform.position.x - DestroyOffset.x , 0.039f , transform.position.z- DestroyOffset.z);
 
-            objectinstance = Instantiate(PlayerRemains, RemainTransform , PlayerTransform.rotation);
+            Instantiate(PlayerRemains, RemainTransform , PlayerTransform.rotation);
             gameObject.GetComponent<AudioSource>().PlayOneShot(destroySound);
             dummyEffect = Instantiate(particleEffect, RemainTransform, transform.rotation);
 

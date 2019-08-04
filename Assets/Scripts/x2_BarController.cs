@@ -5,9 +5,20 @@ using UnityEngine.UI;
 
 public class x2_BarController : MonoBehaviour
 {
-    public CollectibleGreen collectibleGreenScript;
+    [HideInInspector]
+    public bool x2_active;
+
+    [HideInInspector]
+    public float initialTime;
+
+    [HideInInspector]
+    public float WaitTime;
     public Text BarText;
+
+    [HideInInspector]
     public Image progressBar;
+    public Image background;
+    public Image hexBackground;
     public float TimeElapsed;
 
     // Start is called before the first frame update
@@ -20,12 +31,12 @@ public class x2_BarController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(collectibleGreenScript.x2_active)
+        if(x2_active)
         {
-            if((Time.time - collectibleGreenScript.initialTime) < collectibleGreenScript.WaitTime)
+            if((Time.time - initialTime) < WaitTime)
             {
-                TimeElapsed = Time.time - collectibleGreenScript.initialTime;
-                progressBar.fillAmount =1 -  TimeElapsed / collectibleGreenScript.WaitTime;
+                TimeElapsed = Time.time - initialTime;
+                progressBar.fillAmount =1 -  TimeElapsed / WaitTime;
             }
         }
     }

@@ -5,26 +5,35 @@ using UnityEngine.UI;
 
 public class PowerUpBarCOntroller : MonoBehaviour
 {
-    public RedCubePowerUp RedCubeScript;
+    [HideInInspector]
+    public bool ProgressEnable;
+
+    [HideInInspector]
+    public float initialTime;
+
+    [HideInInspector]
+    public float MaxTime;
+
     public float timeElapsed;
     private float FillAmmount;
     public Image PowerUpBar;
+    public Image Background;
+    public Image hexbackground;
     public Text PowerUp;
 
     private void Start()
-    {
-        PowerUpBar = gameObject.GetComponent<Image>();
+    {;
         timeElapsed = 0;
     }
 
     private void Update()
     {
-        if (RedCubeScript.ProgressEnable)
+        if (ProgressEnable)
         {
-            if ((Time.time - RedCubeScript.SnapTime) < RedCubeScript.maxTime)
+            if ((Time.time - initialTime) < MaxTime)
             {
-                timeElapsed = RedCubeScript.maxTime - (Time.time - RedCubeScript.SnapTime);
-                PowerUpBar.fillAmount =  (timeElapsed /RedCubeScript.maxTime);
+                timeElapsed = MaxTime - (Time.time - initialTime);
+                PowerUpBar.fillAmount =  (timeElapsed /MaxTime);
             }
         }
     }

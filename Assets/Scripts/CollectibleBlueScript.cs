@@ -5,10 +5,17 @@ using UnityEngine.Audio;
 
 public class CollectibleBlueScript : MonoBehaviour
 {
+    [HideInInspector]
     public scoreKeeper scoreKeeperScript;
+
     public GameObject effect;
     private GameObject dummyEffect;
     public AudioClip pickUpSound;
+
+    private void Start()
+    {
+        scoreKeeperScript = FindObjectOfType<scoreKeeper>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
